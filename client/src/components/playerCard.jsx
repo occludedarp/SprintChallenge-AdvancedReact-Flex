@@ -3,7 +3,9 @@ import React from 'react';
 const Player = props => {
   return(
     <div>
-      <p></p>
+      <p>{props.name}</p>
+      <p>{props.country}</p>
+      <p>{props.searchInt}</p>
     </div>
   )
 }
