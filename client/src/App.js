@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import Player from './components/playerCard';
+import NavBar from './components/navBar';
 import Form from './components/form'
-import Player from './components/playerCard'
 
 class App extends React.Component {
   state = {
-    players: [],
+    allPlayers: [],
     filteredPlayers: [],
     searchInput: ' '
   }
@@ -15,7 +16,7 @@ class App extends React.Component {
     axios.get('http://localhost:5000/api/players')
       .then(res => 
         this.setState({ 
-          players: res.data, 
+          allPlayers: res.data, 
           filteredPlayers: res.data, })  
       )
       .catch(err => console.log(err))
@@ -31,11 +32,11 @@ class App extends React.Component {
     e.preventDefault();
     if(!this.state.searchInput){
       this.setState({
-        filteredPlayers: this.state.players
+        filteredPlayers: this.state.allPlayers
       })
     } else {
       this.setState({
-        filteredPlayers: this.state.players.filter(players => {
+        filteredPlayers: this.state.allPlayers.filter(players => {
           return players["name"].toLowerCase().search(this.state.searchInput.toLowerCase()) > -1
         })
       })
@@ -45,11 +46,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Form
-          handleChange={this.handleChange}
-          nameSearch={this.searchInput}
-          searchSubmit={this.compareSearch}
-        />
+        <NavBar />
+        <div className="formContainer">
+          <Form 
+            handleChange={this.handleChange}
+            nameSearch={this.searchInput}
+            searchSubmit={this.compareSearch}
+          />
+        </div>
+
         {this.state.filteredPlayers.map((player, index) => (
           <Player
             name={player.name}
