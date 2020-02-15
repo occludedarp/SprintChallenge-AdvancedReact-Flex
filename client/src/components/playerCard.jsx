@@ -2,7 +2,7 @@ import React from 'react';
 
 const Player = props => {
   return(
-    <div>
+    <div className="player">
       <p>{props.name}</p>
       <p>{props.country}</p>
       <p>{props.searchInt}</p>

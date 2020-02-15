@@ -8,10 +8,12 @@ const Form = props => {
         <input 
           type="text"
           name="nameSearch"
+          data-testid="nameSearch"
           value={props.nameSearch}
           onChange={props.handleChange}
         />
       </form>
+
     </div>
   )
 }
